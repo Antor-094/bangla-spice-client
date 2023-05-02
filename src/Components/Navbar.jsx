@@ -7,7 +7,7 @@ const user = null;
 const navigation = [
   { name: "Home", href: "/" },
 
-  { name: "Blog", href: "/" },
+  { name: "Blog", href: "/blog" },
 ];
 
 function classNames(...classes) {
@@ -40,12 +40,12 @@ const Navbar =()=>{
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex  lg:ms-0 flex-shrink-0 items-center">
-                  <p className="hidden h-8 w-auto lg:block text-[#488b8f] font-bold text-xl">
+                  <Link className="hidden h-8 w-auto lg:block text-[#488b8f] font-bold text-xl">
                     Bangla Spice
-                  </p>
-                  <p className="block h-8 w-auto lg:hidden text-[#488b8f] font-bold text-xl">
+                  </Link>
+                  <Link className="block h-8 w-auto lg:hidden text-[#488b8f] font-bold text-xl">
                     Bangla Spice
-                  </p>
+                  </Link>
                 </div>
                 <div className="hidden ms-60 sm:ml-[40%] sm:block">
                   <div className="flex space-x-4">
@@ -81,9 +81,11 @@ const Navbar =()=>{
                       </div>
                     </>
                   ) : (
+                    <Link to='/login'>
                     <button className="bg-[#488b8f] text-white font-medium hover:bg-[#add2c9] hover:text-neutral-700 px-6 py-2 rounded-lg">
                       Login
                     </button>
+                    </Link>
                   )}
                 </Menu>
               </div>
