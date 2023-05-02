@@ -1,8 +1,12 @@
 import { Disclosure, Menu } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
-const user = null;
+
+
+
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -15,6 +19,12 @@ function classNames(...classes) {
 }
 
 const Navbar =()=>{
+  const {user,logOut} = useContext(AuthContext);
+  const handleLogOut =(e)=>{
+
+    logOut();
+
+  }
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -66,26 +76,36 @@ const Navbar =()=>{
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                <Menu
+                  as="div"
+                  className="relative ml-3 flex items-center gap-3"
+                >
                   {user ? (
                     <>
-                      <div className="tooltip" data-tip="hello">
+                      <button onClick={handleLogOut} className="btn-main">
+                        Log out
+                      </button>
+                    </>
+                  ) : (
+                    <Link to="/login">
+                      <button className="btn-main">Login</button>
+                    </Link>
+                  )}
+                  {user ? (
+                    <>
+                      <div className="tooltip" data-tip={user?.displayName}>
                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm   focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            src={user?.photoURL}
                             alt=""
                           />
                         </Menu.Button>
                       </div>
                     </>
                   ) : (
-                    <Link to='/login'>
-                    <button className="bg-[#488b8f] text-white font-medium hover:bg-[#add2c9] hover:text-neutral-700 px-6 py-2 rounded-lg">
-                      Login
-                    </button>
-                    </Link>
+                    <></>
                   )}
                 </Menu>
               </div>

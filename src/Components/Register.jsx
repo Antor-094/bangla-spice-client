@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import backgroundImage from '../assets/foods_images/istockphoto-1152493500-1024x1024.jpg';
 import { AuthContext } from '../provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 
 const Register = () => {
@@ -13,10 +14,11 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [photo,setPhoto] = useState('')
     const [error, setError] = useState("");
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateProf} = useContext(AuthContext);
     const handleRegistration = (event) => {
         
       event.preventDefault();
+      
       setError('')
       if (password.length < 6) {
         setError("The password should be less than 6 characters");
@@ -24,13 +26,17 @@ const Register = () => {
       }
       createUser(email, password)
       .then(result => {
+          updateProf(name,photo)
           const loggedUser = result.user;
+          Swal.fire("Good job!", "You logged in your account", "success");
           console.log(loggedUser)
+          
       })
       .catch(error => {
           console.log(error);
           setError(error.message);
       })
+
     };
     return (
         <div className="flex items-center justify-center mt-20 p-2">
