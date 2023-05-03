@@ -69,7 +69,7 @@ const Login = () => {
       <div className="flex flex-col md:flex-row md:w-1/2 rounded-lg overflow-hidden shadow-lg">
         {/* Left side */}
         <div className="md:w-1/2 bg-cover">
-          <img className="h-full" src={backgroundImage} alt="" />
+          <img className="h-full" src='https://i.ibb.co/BwYMdTT/bangladeshi-food-04-960x640-jpg.webp' alt="" />
         </div>
 
         {/* Right side */}
