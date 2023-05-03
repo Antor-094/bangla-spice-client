@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+.tooltip-container {
+    font-size: 1.2rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100px;
+}

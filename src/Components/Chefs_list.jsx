@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHeart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Chefs_list = ({chef}) => {
     return (
         <div className="card lg:w-96 border hover:border-[#488b8f] border-solid   bg-[] mx-auto p-2">
@@ -21,7 +22,9 @@ const Chefs_list = ({chef}) => {
           </p>
         </div>
         <div className="card-actions justify-end">
+          <Link to={`/recipes/${chef.id}`}>
           <button className="p-3 bg-[#488b8f] rounded-md text-white hover:bg-[#488c8f8b]">View Recipes</button>
+          </Link>
         </div>
       </div>
     </div>

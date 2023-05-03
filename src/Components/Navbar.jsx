@@ -4,10 +4,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
-
-
-
-
 const navigation = [
   { name: "Home", href: "/" },
 
@@ -18,13 +14,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Navbar =()=>{
-  const {user,logOut} = useContext(AuthContext);
-  const handleLogOut =(e)=>{
-
+const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = (e) => {
     logOut();
-
-  }
+  };
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -93,8 +87,11 @@ const Navbar =()=>{
                   )}
                   {user ? (
                     <>
-                      <div className="tooltip" data-tip={user?.displayName}>
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm   focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <div className="tooltip tooltip-left" data-tip={user?.displayName}>
+                        <Menu.Button
+                          className="flex rounded-full bg-gray-800 text-sm   focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                          data-tip={user?.displayName}
+                        >
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -132,6 +129,6 @@ const Navbar =()=>{
       )}
     </Disclosure>
   );
-}
+};
 
 export default Navbar;
