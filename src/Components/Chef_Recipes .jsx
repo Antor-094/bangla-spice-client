@@ -1,49 +1,151 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
+import { BiFoodMenu } from "react-icons/bi";
+import { GrUserExpert } from "react-icons/gr";
+import { MdOutlineFavorite } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
-import Single_recipe from "./Single_recipe";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import Swal from "sweetalert2";
 
-const Chef_Recipes = () => {
-  const recipes_page = useLoaderData();
-  const { id, name, bio, image, likes, recipes, experience,recipes_info } = recipes_page;
-  // console.log(id)
-  // console.log(recipes);
+const ChefDetails = () => {
+  const chefDetails = useLoaderData();
+  const handleToast = (event) => {
+    const likeButton = event.currentTarget;
+    likeButton.disabled = true;
+    Swal.fire({
+      icon: 'success',
+      title: 'This recipe is your favorite!',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   return (
     <div>
-      <div className="bg-gradient-to-r from-blue-400 to-purple-400 sm:min-h-screen py-10 px-6 md:px-20 lg:px-40 xl:px-60">
-  <div className="flex flex-col md:flex-row items-center md:items-start">
-    <img
-      src={image}
-      alt={name}
-      className="w-full md:w-2/5 h-auto rounded-lg shadow-xl mb-8 md:mb-0 md:h-[450px] object-cover"
-    />
-    <div className="md:w-3/5 md:ml-8 text-center md:text-left">
-      <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">{name}</h1>
-      <p className="text-lg md:text-xl text-gray-200 mb-6">{bio}</p>
-      <div className="flex items-center justify-center md:justify-start space-x-4">
-        <div className="flex items-center text-gray-200 text-lg md:text-xl">
-          <FaThumbsUp className="mr-2" />
-          <span>{likes}</span>
+      <div className="flex flex-col lg:flex-row items-center gap-20 lg:p-10 lg:w-[95%] mx-auto">
+        {/* chef pic */}
+        <div className="lg:w-[817px]">
+          <img src={chefDetails.image} alt="" />
         </div>
-        <div className="text-gray-200 text-lg md:text-xl">
-          <span className="font-bold">{recipes}</span> recipes
-        </div>
-        <div className="text-gray-200 text-lg md:text-xl">
-          <span className="font-bold">{experience}</span> years of experience
+        {/* chef details */}
+        <div className="lg:w-[1000px] p-2">
+          <p className="card-title text-[#5ea3a3]">Name: {chefDetails.name}</p>
+          <p className="my-5">
+            <span className="font-bold">Bio</span>:{" "}
+            <span className="text-[#4E4E4F]">{chefDetails.bio}</span>
+          </p>
+          <div className="lg:card-actions justify-between">
+            <p className="flex gap-3 items-center">
+              <FaThumbsUp className="text-[#5ea3a3]"></FaThumbsUp>{" "}
+              {chefDetails.likes} likes
+            </p>
+            <p className="flex gap-3 items-center">
+              Number Of Recipes: {chefDetails.recipes}{" "}
+              <BiFoodMenu className="text-[#5ea3a3]"></BiFoodMenu>
+            </p>
+            <p className="flex gap-3 items-center">
+              Experience: {chefDetails.experience} years
+              <GrUserExpert className="text-[#5ea3a3]"></GrUserExpert>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-    <p className="text-3xl text-center font-bold my-6">Recipes</p>
-    <div className="grid md:grid-cols-3 my-10 gap-2 p-1">
-      {
-        recipes_info.map((singleRecipe,index) => <Single_recipe key={index} singleRecipe={singleRecipe}></Single_recipe> )
-      }
-    </div>
+      <div className="mt-10 border border-solid shadow-sm lg:p-10 lg:w-[95%] mx-auto">
+        <p className="text-[#488b8f] font-semibold mb-6 text-center">
+          Chef's Special Recipes
+        </p>
+        <div className="border-t border-solid border-[#488b8f] grid lg:grid-cols-3 ">
+          {chefDetails.recipes_info.map((recipe, index) => (
+            <div key={recipe.name}>
+              <div className="card p-3 mt-7 lg:w-96 border rounded-none border-solid ">
+                <div className="card-body pt-3 pl-0 pe-0 pb-0">
+                  <h2 className="card-title text-base text-[#488b8f]">
+                    Recipe:{" "}
+                    <span className="text-black font-thin">{recipe.name}</span>
+                  </h2>
+                  <div className="text-[#4A4A4A] text-sm ">
+                    <h2 className="card-actions ps-0 text-base text-[#488b8f]">
+                      Ingredients:
+                    </h2>
+                    <ol className="list-decimal px-4">
+                      {recipe.ingredients.map((r) => (
+                        <li key={r}>{r}</li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div>
+                    <p className="text-[#488b8f]">Cooking Method :</p>
+                    <p>
+                      {recipe.cooking_method.length > 250 ? (
+                        <>
+                          {recipe.cooking_method.slice(0, 250)}...{" "}
+                          <button>
+                            <label
+                              htmlFor="my-modal-3"
+                              className="link link-hover text-[#488b8f]"
+                            >
+                              read more
+                            </label>
+                          </button>
+                        </>
+                      ) : (
+                        <>{recipe.cooking_method}</>
+                      )}
+                    </p>
+                  </div>
+                  <div className="divider"></div>
+                  <div className="card-actions justify-between">
+                    <div className="w-24">
+                      <Rating
+                        style={{ maxWidth: 180 }}
+                        value={recipe.rating}
+                        readOnly
+                      />
+                    </div>
+                    {/* heart button */}
+                    <button
+                      className="btn bg-[#5ea3a3] text-white font-medium hover:bg-[#E29F28]"
+                      onClick={handleToast}
+                    >
+                      <MdOutlineFavorite></MdOutlineFavorite>
+                      <span>Add to favorite</span>
+                    </button>
+                  </div>
+                </div>
+                {/* modal */}
+                {/* The button to open modal */}
+
+                {/* Put this part before </body> tag */}
+                <input
+                  type="checkbox"
+                  id="my-modal-3"
+                  className="modal-toggle"
+                />
+                <div className="modal">
+                  <div className="modal-box relative">
+                    <label
+                      htmlFor="my-modal-3"
+                      className="btn btn-sm btn-circle absolute right-2 top-2"
+                    >
+                      ✕
+                    </label>
+                    <h3 className="text-lg font-bold">
+                      <p className="text-[#488b8f]">Cooking Method :</p>
+                    </h3>
+                    <p className="py-4">{recipe.cooking_method}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Chef_Recipes;
+export default ChefDetails;

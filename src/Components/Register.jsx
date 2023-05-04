@@ -17,7 +17,14 @@ export default function Register() {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if (!/(?=.*[A-Z])/.test(password)) {
+    if (password.length < 6) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please add at least 6 characters in your password!",
+      });
+    }
+   else if (!/(?=.*[A-Z])/.test(password)) {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -29,17 +36,11 @@ export default function Register() {
         title: "Oops...",
         text: "Please add at least one numbers!",
       });
-    } else if (password.length < 8) {
+    } else if (password.length < 6) {
       return Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Please add at least 8 characters in your password!",
-      });
-    } else if (!/(?=.*[!@#$&*])/.test(password)) {
-      return Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please add a special character!",
+        text: "Please add at least 6 characters in your password!",
       });
     }
     createUser(email, password)
@@ -47,7 +48,7 @@ export default function Register() {
         updateProf(name, photo);
         Swal.fire("Good job!", "You created an account", "success");
 
-        navigate("/login");
+        navigate("/");
       })
       .catch((e) => {
         return Swal.fire({
@@ -96,7 +97,7 @@ export default function Register() {
                   type="text"
                   autoComplete="name"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D54215] sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#488b8f] sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -115,7 +116,7 @@ export default function Register() {
                   type="text"
                   autoComplete="photo"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D54215] sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#488b8f] sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -133,7 +134,7 @@ export default function Register() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D54215] sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#488b8f] sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -154,7 +155,7 @@ export default function Register() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#D54215] sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#488b8f] sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -169,17 +170,18 @@ export default function Register() {
               Accept The {/* The button to open modal */}
               <label
                 htmlFor="my-modal-6"
-                className="link  hover:text-[#D54215]"
+                className="link  hover:text-[#488b8f]"
               >
                 Term and Conditions
               </label>
             </div>
 
             <div>
-              <button
+            <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-[#D54215] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#f49275] hover:text-neutral-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D54215]"
-                disabled={!accepted}
+                className={`btn bg-[#D74C22] hover:bg-[#E29F28] w-full ${
+                  accepted ? "" : "btn-disabled"
+                }`}
               >
                 Sign up
               </button>
@@ -190,7 +192,7 @@ export default function Register() {
             Have already an account?{" "}
             <Link
               to="/login"
-              className="font-semibold leading-6 text-[#D54215] hover:text-[#f49275]"
+              className="font-semibold leading-6 text-[#488b8f] hover:text-[#5ea3a3]"
             >
               Sign in
             </Link>
