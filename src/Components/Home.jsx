@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Banner from './Banner';
 import Chefs_list from './Chefs_list';
 import JonUs from './JonUs';
+import Featured_foods from './featured_foods';
 
 const Home = () => {
     const [chefs,setChef] = useState()
@@ -24,7 +25,14 @@ const Home = () => {
                 )
             }
           </div>
+          
+        <div className='my-16'>
+        <Featured_foods></Featured_foods>
+        </div>
+          
+          <div className='my-12'>
           <JonUs></JonUs>
+          </div>
         </div>
     );
 };
