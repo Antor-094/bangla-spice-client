@@ -1,4 +1,4 @@
-# BanglaTable
+# Bangla Spice
 
 Bangla Spice is a web application for a restaurant where users can find different recipes, view the details of the chefs, read blog posts related to cooking, and also download PDF versions of the posts.
 
