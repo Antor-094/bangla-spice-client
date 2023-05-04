@@ -5,11 +5,13 @@ import Register from "../Components/Register";
 import Login from "../Components/Login";
 import Blog from "../Components/Blog";
 import Chef_Recipes  from "../Components/Chef_Recipes ";
+import NotFound from "../Components/NotFound";
 
 const router = createBrowserRouter([
     {
         path:'/',
         element:<App></App>,
+        errorElement:<NotFound></NotFound>,
         children:[
             {
                 path:'/',
