@@ -1,8 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
+import { FaDownload } from "react-icons/fa";
+import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { saveAs } from "file-saver";
 
 const Blog = () => {
+  const pdfRef = useRef();
+
+  const handleDownloadPdf = () => {
+    const pdfBlob = pdfRef.current.toBlob();
+    saveAs(pdfBlob, "blog.pdf");
+  };
+
   return (
-    <div className="grid gap-3 p-2 my-12 md:w-[80%] mx-auto">
+    <div>
+      <h1>Blog Page</h1>
+      <PDFDownloadLink
+        document={
+          <Document>
+            <Page>
+              <View style={styles.container}>
+                <Text style={styles.title}>Blog Page</Text>
+                <Text style={styles.body}>
+                  This is a sample PDF document for the Blog page.
+                </Text>
+              </View>
+            </Page>
+          </Document>
+        }
+        fileName="blog.pdf"
+      >
+        {({ loading }) =>
+          loading ? (
+            <span>Loading PDF...</span>
+          ) : (
+            <button onClick={handleDownloadPdf}>
+              <FaDownload />
+              &nbsp;Download PDF
+            </button>
+          )
+        }
+      </PDFDownloadLink>
+      <div style={{ display: "none" }}>
+        <Document ref={pdfRef}>
+          <Page>
+            <View style={styles.container}>
+              <Text style={styles.title}>Blog Page</Text>
+              <Text style={styles.body}>
+                This is a sample PDF document for the Blog page.
+              </Text>
+            </View>
+          </Page>
+        </Document>
+      </div>
+      <div className="grid gap-3 p-2 my-12 md:w-[80%] mx-auto">
       <div className="card bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">
@@ -83,7 +133,27 @@ const Blog = () => {
         </div>
       </div>
     </div>
+    </div>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 10,
+  },
+  body: {
+    fontSize: 14,
+    textAlign: "justify",
+    margin: 20,
+  },
+});
 
 export default Blog;

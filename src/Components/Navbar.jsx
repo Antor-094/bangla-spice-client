@@ -87,7 +87,7 @@ export default function Navbar() {
                     </>
                   ) : (
                     <Link to="/login">
-                      <button className="btn-main bg-[#488b8f] p-2 rounded font-bold">Login</button>
+                      <button className="btn-main bg-[#488b8f] p-2 rounded font-bold text-white">Login</button>
                     </Link>
                   )}
                   {user ? (

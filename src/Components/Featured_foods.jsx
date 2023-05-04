@@ -6,7 +6,7 @@ const Featured_foods = () => {
     const [foods,setFoods] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:5000/recipes')
+        fetch('https://bangla-spice-server-antor-094.vercel.app/recipes')
         .then(res=>res.json())
         .then(data=>setFoods(data))
         .catch(err=>console.log(err))

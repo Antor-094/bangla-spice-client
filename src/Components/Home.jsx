@@ -7,7 +7,7 @@ import Featured_foods from './featured_foods';
 const Home = () => {
     const [chefs,setChef] = useState()
     useEffect(()=>{
-    fetch('http://localhost:5000/chefs')
+    fetch('https://bangla-spice-server-antor-094.vercel.app/chefs')
     .then(res=>res.json())
     .then(data=>setChef(data))
     })

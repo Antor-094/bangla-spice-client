@@ -46,8 +46,15 @@ export default function Register() {
     createUser(email, password)
       .then((r) => {
         updateProf(name, photo);
-        Swal.fire("Good job!", "You created an account", "success");
-
+        // Swal.fire("Good job!", "You created an account", "success");
+        Swal.fire({
+          icon: 'success',
+          title: 'Your account has been created',
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
       })
       .catch((e) => {
@@ -68,7 +75,7 @@ export default function Register() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
-            src="https://i.ibb.co/yk2NQr5/528k217e-1.png"
+            src="https://i.ibb.co/DCnRT2M/1996055.png"
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -179,8 +186,8 @@ export default function Register() {
             <div>
             <button
                 type="submit"
-                className={`btn bg-[#D74C22] hover:bg-[#E29F28] w-full ${
-                  accepted ? "" : "btn-disabled"
+                className={`btn  w-full ${
+                  accepted ? "bg-[#488b8f] hover:bg-[#E29F28]" : "btn-disabled"
                 }`}
               >
                 Sign up

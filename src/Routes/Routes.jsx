@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             {
                 path:'/recipes/:id',
                 element:<PrivateRoute><Chef_Recipes></Chef_Recipes></PrivateRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/chefs/${params.id}`)
+                loader: ({params})=> fetch(`https://bangla-spice-server-antor-094.vercel.app/chefs/${params.id}`)
             },
         ]
     }
