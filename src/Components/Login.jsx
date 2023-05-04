@@ -142,7 +142,7 @@ export default function Login() {
     <div className="divider">OR</div>
           <button
             onClick={handleLogInGoogle}
-            className="btn-second w-full flex gap-2 justify-center items-center"
+            className="btn-second w-full bg-[#faf9f9] p-2 border hover:border-2 border-gray-500 rounded-sm flex gap-2 justify-center items-center"
           >
             <FaGoogle /> Login with Google
           </button>
@@ -150,7 +150,7 @@ export default function Login() {
           <br />
           <button
             onClick={handleLogInGithub}
-            className="btn-second w-full flex gap-2 justify-center items-center"
+            className="btn-second w-full bg-[#faf9f9] border flex gap-2 p-2 hover:border-2 border-gray-500 rounded-sm justify-center items-center"
           >
             <FaGithub /> Login with Github
           </button>
