@@ -25,7 +25,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="hero min-h-screen mb-7" style={style}>
+    <div className="hero min-h-[90vh] mb-7" style={style}>
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">

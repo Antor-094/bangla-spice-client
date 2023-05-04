@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Banner from './Banner';
 import Chefs_list from './Chefs_list';
+import JonUs from './JonUs';
 
 const Home = () => {
     const [chefs,setChef] = useState()
@@ -23,6 +24,7 @@ const Home = () => {
                 )
             }
           </div>
+          <JonUs></JonUs>
         </div>
     );
 };
