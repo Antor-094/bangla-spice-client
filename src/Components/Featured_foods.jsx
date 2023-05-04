@@ -12,7 +12,7 @@ const Featured_foods = () => {
         .catch(err=>console.log(err))
     },[])
     return (
-        <div>
+        <div className='p-1'>
             <h1 className='text-3xl font-bold text-center my-6 '>Some Featured Foods of BD</h1>
             <div className='grid md:grid-cols-3 md:w-[80%] gap-3 mx-auto my-4'>
         
