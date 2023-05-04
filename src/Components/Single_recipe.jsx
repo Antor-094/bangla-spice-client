@@ -1,20 +1,21 @@
-import React from 'react'
-import { FaHeart } from 'react-icons/fa';
-import Swal from "sweetalert2";
+import React from 'react';
+import { FaHeart, FaStar, FaStarHalf } from 'react-icons/fa';
+import Rating from 'react-rating';
+import Swal from 'sweetalert2';
 
-const Single_recipe = ({ singleRecipe }) => {
+const SingleRecipe = ({ singleRecipe }) => {
   const { name, ingredients, cooking_method, rating } = singleRecipe;
   const handleToast = (event) => {
     const likeButton = event.currentTarget;
     likeButton.disabled = true;
-    
+
     Swal.fire({
       icon: 'success',
-      title: 'this recipe is your favorite!',
+      title: 'This recipe is your favorite!',
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
   };
 
@@ -32,13 +33,25 @@ const Single_recipe = ({ singleRecipe }) => {
         </div>
         <p className="text-base text-gray-700">{cooking_method}</p>
       </div>
-      <div className="flex items-center justify-center p-4 bg-base-200">
+      <div className="flex justify-between items-center px-6 py-4 bg-base-200">
+        <span className="font-bold text-lg">
+          <Rating
+            style={{}}
+            initialRating={rating}
+            readonly
+            fullSymbol={<FaStar className="text-yellow-400" />}
+            emptySymbol={<FaStar className="text-gray-400" />}
+            fractions={2}
+            partialSymbol={<FaStarHalf className="text-yellow-400" />}
+          />
+        </span>
         <button className="btn btn-primary btn-heart" onClick={handleToast}>
-          <FaHeart className="" />
+          <FaHeart className="mr-2" />
           <span>like</span>
         </button>
       </div>
     </div>
   );
 };
-export default Single_recipe
+
+export default SingleRecipe;
