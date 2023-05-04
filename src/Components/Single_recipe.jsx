@@ -21,18 +21,21 @@ const SingleRecipe = ({ singleRecipe }) => {
 
   return (
     <div className="card bg-base-100 shadow-lg rounded-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition duration-300">
-      <div className="card-body p-6">
-        <h2 className="text-center font-sans font-bold text-3xl mb-6">{name}</h2>
-        <div className="text-base text-gray-700 mb-6">
-          <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
-          <ul>
-            {ingredients.map((i, index) => (
-              <li key={index}>{i}</li>
-            ))}
-          </ul>
-        </div>
-        <p className="text-base text-gray-700">{cooking_method}</p>
-      </div>
+      <div className="card-body p-6 d-flex flex-column">
+  <h2 className="text-center font-sans font-bold text-3xl mb-6">{name}</h2>
+  <div className="text-base text-gray-700 mb-6">
+    <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
+    <ul>
+      {ingredients.map((i, index) => (
+        <li key={index}>{i}</li>
+      ))}
+    </ul>
+  </div>
+  <div className="mt-auto">
+    <p className="text-base text-gray-700">{cooking_method}</p>
+  </div>
+</div>
+
       <div className="flex justify-between items-center px-6 py-4 bg-base-200">
         <span className="font-bold text-lg">
           <Rating

@@ -1,7 +1,7 @@
 import { Disclosure, Menu } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const navigation = [
@@ -81,9 +81,9 @@ const Navbar = () => {
                       </button>
                     </>
                   ) : (
-                    <Link to="/login">
+                    <NavLink to="/login">
                       <button className="btn-main">Login</button>
-                    </Link>
+                    </NavLink>
                   )}
                   {user ? (
                     <>
