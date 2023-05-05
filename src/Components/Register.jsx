@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import "../../Styles/Styles.css";
 import { useContext, useState } from "react";
 
@@ -9,7 +9,11 @@ import { AuthContext } from "../provider/AuthProvider";
 export default function Register() {
   const [accepted, setAccepted] = useState(false);
   const navigate = useNavigate();
-  const { createUser, updateProf } = useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const { createUser, updateProf ,setLoading} = useContext(AuthContext);
+  
+  console.log(location)
   const handleCreateUser = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -55,7 +59,9 @@ export default function Register() {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(from, { replace: true });
+        
+        setLoading(false)
       })
       .catch((e) => {
         return Swal.fire({

@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 // import "../../Styles/Styles.css";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
@@ -11,6 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log(location)
   const handleLogIn = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -137,6 +138,7 @@ export default function Login() {
       >
         Register
       </Link>
+      
     </p>
 
     <div className="divider">OR</div>
